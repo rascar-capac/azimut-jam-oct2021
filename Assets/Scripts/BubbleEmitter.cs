@@ -13,10 +13,8 @@ public class BubbleEmitter : MonoBehaviour
 
 public enum CharacterName
 {
-    MARCO,
-    POLO,
-    PENNE,
-    LOPE,
-    MICHEL,
-    PATRICK
+    CAPTAIN_MAYO,
+    DOCTOR_HEARTBREAK,
+    MISTER_WESLEY_GOODCAT,
+    LADY_LIKEGOOD,
 }

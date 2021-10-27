@@ -8,8 +8,8 @@ public class RepliesHandler : MonoBehaviour
 
     [SerializeField] private Bubble bubblePrefab;
     [SerializeField] private Reply[] replies;
+    [SerializeField] private Canvas canvas;
     private List<Bubble> bubbles;
-    private Canvas canvas;
 
 
 
@@ -20,11 +20,6 @@ public class RepliesHandler : MonoBehaviour
     }
 
 
-
-    private void Awake()
-    {
-        canvas = GetComponent<Canvas>();
-    }
 
     private void Start()
     {
