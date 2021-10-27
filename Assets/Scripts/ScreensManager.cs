@@ -1,16 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ScreensManager : MonoBehaviour
 {
     public static ScreensManager Instance => instance;
+    public RepliesHandler[] Screens => screens;
     public bool CanGoLeft => currentScreenIndex > 0;
     public bool CanGoRight => currentScreenIndex < screens.Length - 1;
+    public RepliesHandler CurrentScreen => screens[currentScreenIndex];
+    // public UnityEvent OnScreenChanged => onScreenChanged;
 
     private static ScreensManager instance;
-    [SerializeField] private GameObject[] screens;
+    [SerializeField] private RepliesHandler[] screens;
     [SerializeField] private int currentScreenIndex;
+    [SerializeField] private Camera mainCamera;
+    // private UnityEvent onScreenChanged;
 
 
 
@@ -18,20 +24,20 @@ public class ScreensManager : MonoBehaviour
     {
         if (!CanGoLeft) return;
 
-        screens[currentScreenIndex].SetActive(false);
         currentScreenIndex--;
-        screens[currentScreenIndex].SetActive(true);
+        // onScreenChanged.Invoke();
         UIManager.Instance.UpdateArrows(this);
+        SetCameraPosition();
     }
 
     public void GoRight()
     {
         if (!CanGoRight) return;
 
-        screens[currentScreenIndex].SetActive(false);
         currentScreenIndex++;
-        screens[currentScreenIndex].SetActive(true);
+        // onScreenChanged.Invoke();
         UIManager.Instance.UpdateArrows(this);
+        SetCameraPosition();
     }
 
 
@@ -39,21 +45,16 @@ public class ScreensManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-
-        foreach(var screen in screens)
-        {
-            screen.SetActive(false);
-        }
-
-        screens[currentScreenIndex].SetActive(true);
+        // onScreenChanged = new UnityEvent();
     }
 
+    private void Start()
+    {
+        SetCameraPosition();
+    }
 
-
-    // [System.Serializable]
-    // public class Screen
-    // {
-    //     [SerializeField] GameObject gameObject;
-    //     [SerializeField]
-    // }
+    private void SetCameraPosition()
+    {
+        mainCamera.transform.position = new Vector3(CurrentScreen.transform.position.x, mainCamera.transform.position.y, mainCamera.transform.position.z);
+    }
 }
