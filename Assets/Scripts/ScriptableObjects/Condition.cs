@@ -10,6 +10,7 @@ public class Condition : ScriptableObject
     [SerializeField] private BoolValue eventCondition;
     [SerializeField] private float timeValue;
     [SerializeField] private CharacterPosition characterPosition;
+    [SerializeField] private Conversation conversation;
 
     public bool IsValid()
     {
@@ -21,6 +22,8 @@ public class Condition : ScriptableObject
                 return TimeManager.Instance.Timer >= timeValue;
             case ConditionType.CHARACTER_POSITION:
                 return CharactersManager.Instance.GetCharacter(characterPosition.CharacterName).CurrentScreen == characterPosition.ScreenIndex;
+            case ConditionType.CONVERSATION_ENDED:
+                return conversation.IsEnded;
             default:
                 return false;
         }
@@ -28,7 +31,8 @@ public class Condition : ScriptableObject
 
     public void Init()
     {
-        eventCondition.Init();
+        eventCondition?.Init();
+        conversation?.Init();
     }
 
 
@@ -37,7 +41,8 @@ public class Condition : ScriptableObject
     {
         EVENT_CONDITION,
         TIME_VALUE,
-        CHARACTER_POSITION
+        CHARACTER_POSITION,
+        CONVERSATION_ENDED
     }
 
     [System.Serializable]

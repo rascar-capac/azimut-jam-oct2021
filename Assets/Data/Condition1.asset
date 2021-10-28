@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c40c2749b870a45ab19c5f82809a63, type: 3}
   m_Name: Condition1
   m_EditorClassIdentifier: Assembly-CSharp::EventsManager/Condition
-  conditionType: 0
-  eventCondition: {fileID: 11400000, guid: f6042a2af29aebc4997559ff4ad0cd6d, type: 2}
+  conditionType: 3
+  eventCondition: {fileID: 0}
   timeValue: 0
   characterPosition:
     characterName: 0
     screenIndex: 0
+  conversation: {fileID: 11400000, guid: 4d4b2704e1b69004884f966c52c401b7, type: 2}

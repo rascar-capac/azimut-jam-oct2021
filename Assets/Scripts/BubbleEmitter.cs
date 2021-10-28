@@ -20,13 +20,14 @@ public class BubbleEmitter : MonoBehaviour
     {
         transform.position = screensPositions[screenIndex].position;
         currentScreen = screenIndex;
+        CharactersManager.Instance.CheckCharacterRoom(this);
     }
 
 
 
     private void Awake()
     {
-        MoveTo(currentScreen);
+        transform.position = screensPositions[currentScreen].position;
     }
 }
 
