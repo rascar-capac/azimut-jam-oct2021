@@ -7,18 +7,32 @@ using UnityEngine.Events;
 public class Trigger : MonoBehaviour
 {
     [SerializeField] private List<Sprite> alternativeSprites;
+    [SerializeField] private bool mustLoop;
+    private bool isOver;
     private int currentSpriteIndex;
     private SpriteRenderer image;
     [SerializeField] private UnityEvent onClick;
+    [SerializeField] private GameObject outline;
 
 
 
-    public void ChangeSprite(bool mustLoop)
+    public void ChangeSprite()
     {
-        if (++currentSpriteIndex >= alternativeSprites.Count)
+        if (isOver) return;
+
+        currentSpriteIndex++;
+
+        if (mustLoop && currentSpriteIndex >= alternativeSprites.Count)
         {
-            currentSpriteIndex = mustLoop ? 0 : currentSpriteIndex - 1;
+            currentSpriteIndex = 0;
         }
+
+        if (!mustLoop && currentSpriteIndex + 1 == alternativeSprites.Count)
+        {
+            isOver = true;
+            outline.SetActive(false);
+        }
+
         image.sprite = alternativeSprites[currentSpriteIndex];
     }
 
@@ -26,10 +40,23 @@ public class Trigger : MonoBehaviour
     {
         image = GetComponent<SpriteRenderer>();
         alternativeSprites.Insert(0, image.sprite);
+        outline.SetActive(false);
     }
 
     private void OnMouseDown()
     {
         onClick.Invoke();
+    }
+
+    private void OnMouseOver()
+    {
+        if (isOver) return;
+
+        outline.SetActive(true);
+    }
+
+    private void OnMouseExit()
+    {
+        outline.SetActive(false);
     }
 }
