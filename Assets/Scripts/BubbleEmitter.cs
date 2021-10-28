@@ -6,9 +6,21 @@ public class BubbleEmitter : MonoBehaviour
 {
     public CharacterName Name => characterName;
     public Transform BubbleAnchor => bubbleAnchor;
+    public Transform[] ScreensPositions => screensPositions;
+    public int CurrentScreen => currentScreen;
 
     [SerializeField] private CharacterName characterName;
     [SerializeField] private Transform bubbleAnchor;
+    [SerializeField] private Transform[] screensPositions;
+    [SerializeField] private int currentScreen;
+
+
+
+    public void MoveTo(int screenIndex)
+    {
+        transform.position = screensPositions[screenIndex].position;
+        currentScreen = screenIndex;
+    }
 }
 
 public enum CharacterName

@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CaptainMayo
       objectReference: {fileID: 0}
+    - target: {fileID: 2994117013478861075, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4823067762516018998, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -126,6 +130,10 @@ PrefabInstance:
     - target: {fileID: 5208117132912299546, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
       propertyPath: m_SortingLayerID
       value: 1736461807
+      objectReference: {fileID: 0}
+    - target: {fileID: 8273778891537676555, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
+      propertyPath: screensPositions.Array.size
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
@@ -214,6 +222,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8273778891537676555, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
       propertyPath: characterName
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8273778891537676555, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
+      propertyPath: screensPositions.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8418451341402277204, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
@@ -305,13 +317,13 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5208117132912299546, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1736461807
-      objectReference: {fileID: 0}
     - target: {fileID: 8273778891537676555, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
       propertyPath: characterName
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8273778891537676555, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
+      propertyPath: screensPositions.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8418451341402277204, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
       propertyPath: m_LocalPosition.y
@@ -345,6 +357,10 @@ PrefabInstance:
     - target: {fileID: 2994117013478861075, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
       propertyPath: m_Name
       value: MisterWesleyGoodCat
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994117013478861075, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4823067762516018998, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
       propertyPath: m_RootOrder
@@ -413,6 +429,10 @@ PrefabInstance:
     - target: {fileID: 8273778891537676555, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
       propertyPath: characterName
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8273778891537676555, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}
+      propertyPath: screensPositions.Array.size
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f35e8811d6c45be48a59d1c61b5d2c19, type: 3}

@@ -3,18 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class Trigger : MonoBehaviour
 {
+    [SerializeField] private List<Sprite> alternativeSprites;
+    private int currentSpriteIndex;
+    private SpriteRenderer image;
     [SerializeField] private UnityEvent onClick;
 
 
 
-    private void Awake()
+    public void ChangeSprite(bool mustLoop)
     {
-        onClick = new UnityEvent();
+        if (++currentSpriteIndex >= alternativeSprites.Count)
+        {
+            currentSpriteIndex = mustLoop ? 0 : currentSpriteIndex - 1;
+        }
+        image.sprite = alternativeSprites[currentSpriteIndex];
     }
 
-    private void onMouseDown()
+    private void Awake()
+    {
+        image = GetComponent<SpriteRenderer>();
+        alternativeSprites.Insert(0, image.sprite);
+    }
+
+    private void OnMouseDown()
     {
         onClick.Invoke();
     }

@@ -4,64 +4,41 @@ using UnityEngine;
 
 public class RepliesHandler : MonoBehaviour
 {
-    public Reply[] Replies => replies;
-
     [SerializeField] private Bubble bubblePrefab;
-    [SerializeField] private Reply[] replies;
     [SerializeField] private Canvas canvas;
-    private List<Bubble> bubbles;
+    [SerializeField] private float interval;
+    private Queue<Bubble> bubbles;
+    private float timer;
 
 
 
-    public void RemoveBubble(Bubble bubble)
+    public void CreateBubbles(Reply[] replies)
     {
-        bubbles.Remove(bubble);
-        Destroy(bubble.gameObject);
+        foreach (var reply in replies)
+        {
+            Bubble bubble = Instantiate(bubblePrefab, canvas.transform);
+            bubble.Init(reply, this);
+            bubbles.Enqueue(bubble);
+        }
     }
 
 
 
-    private void Start()
+    private void Awake()
     {
-        CreateBubbles();
-        foreach (var bubble in bubbles)
-        {
-            bubble.gameObject.SetActive(false);
-        }
-        // ScreensManager.Instance.OnScreenChanged.AddListener(HideAllBubbles);
+        bubbles = new Queue<Bubble>();
+        timer = interval;
     }
 
     private void Update()
     {
-        foreach (var bubble in bubbles)
+        if (bubbles.Count == 0) return;
+
+        timer -= Time.deltaTime;
+        if (timer <= 0)
         {
-            if (!bubble.gameObject.activeSelf && bubble.Reply.Time <= TimeManager.Instance.Timer)
-            {
-                bubble.Show();
-            }
+            bubbles.Dequeue().Show();
+            timer = interval;
         }
     }
-
-    private void CreateBubbles()
-    {
-        bubbles = new List<Bubble>();
-        foreach (var reply in Replies)
-        {
-            Bubble bubble = Instantiate(bubblePrefab, canvas.transform);
-            bubble.Init(reply, this);
-            bubbles.Add(bubble);
-        }
-    }
-}
-
-[System.Serializable]
-public class Reply
-{
-    public string Text => text;
-    public float Time => time;
-    public CharacterName CharacterName => characterName;
-
-    [SerializeField] [TextArea] private string text;
-    [SerializeField] private float time;
-    [SerializeField] private CharacterName characterName;
 }

@@ -279,4 +279,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   context: {fileID: 6801680249418596402}
-  displayDuration: 3
+  displayDuration: 2

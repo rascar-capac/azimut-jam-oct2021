@@ -23,8 +23,9 @@ public class Bubble : MonoBehaviour
         this.reply = reply;
         context.text = reply.Text;
         this.screen = screen;
-        anchor = CharactersManager.Instance.GetCharacter(reply.CharacterName).BubbleAnchor;
+        rectTransform.position = CharactersManager.Instance.GetCharacter(reply.CharacterName).BubbleAnchor.position;
         canvasGroup.alpha = 0f;
+        gameObject.SetActive(false);
     }
 
     public void Show()
@@ -44,12 +45,12 @@ public class Bubble : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
     }
 
-    private void Update()
-    {
-        if (!anchor) return;
+    // private void Update()
+    // {
+    //     if (!anchor) return;
 
-        rectTransform.position = anchor.position;
-    }
+    //     rectTransform.position = anchor.position;
+    // }
 
     private IEnumerator ChronoKill()
     {
@@ -59,19 +60,9 @@ public class Bubble : MonoBehaviour
 
     private void Kill()
     {
-        if (gameObject.activeInHierarchy)
-        {
-            canvasGroup
-                    .DOFade(0f, 0.5f)
-                    .SetEase(Ease.InQuint)
-                    .OnComplete(() =>
-                            {
-                                screen.RemoveBubble(this);
-                            });
-        }
-        else
-        {
-            screen.RemoveBubble(this);
-        }
+        canvasGroup
+                .DOFade(0f, 0.5f)
+                .SetEase(Ease.InQuint)
+                .OnComplete(() => Destroy(gameObject));
     }
 }
