@@ -20,7 +20,4 @@ public class BoolValue : ScriptableObject
     {
         val = !val;
     }
-
-
-
 }

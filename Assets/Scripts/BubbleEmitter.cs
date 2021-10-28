@@ -21,6 +21,13 @@ public class BubbleEmitter : MonoBehaviour
         transform.position = screensPositions[screenIndex].position;
         currentScreen = screenIndex;
     }
+
+
+
+    private void Awake()
+    {
+        MoveTo(currentScreen);
+    }
 }
 
 public enum CharacterName
