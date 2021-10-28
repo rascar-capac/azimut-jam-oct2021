@@ -8,6 +8,7 @@ public class EventsManager : MonoBehaviour
 
     private static EventsManager instance;
     [SerializeField] private Event[] events;
+    [SerializeField] private float transitionDuration;
 
 
 
@@ -24,7 +25,7 @@ public class EventsManager : MonoBehaviour
     {
         foreach (var ev in events)
         {
-            ev.CheckEvent();
+            StartCoroutine(ev.CheckEvent(transitionDuration));
         }
     }
 
@@ -35,14 +36,19 @@ public class EventsManager : MonoBehaviour
     {
         private bool isOver;
         [SerializeField] private Condition[] conditions;
-        [SerializeField] private AConsequence consequence;
+        [SerializeField] private CharacterMovement characterMovement;
 
-        public void CheckEvent()
+        public IEnumerator CheckEvent(float transitionDuration)
         {
-            if (!isOver && ConditionsAreValid())
+            if (isOver || !ConditionsAreValid())
             {
-                consequence.Apply();
+                yield return null;
+            }
+            else
+            {
                 isOver = true;
+                yield return new WaitForSeconds(transitionDuration);
+                characterMovement.Apply();
             }
         }
 
@@ -67,17 +73,17 @@ public class EventsManager : MonoBehaviour
         }
     }
 
-    // [System.Serializable]
-    // public class CharacterMovement : AConsequence
-    // {
-    //     [SerializeField] private BubbleEmitter character;
-    //     [SerializeField] private int screenIndex;
+    [System.Serializable]
+    public class CharacterMovement
+    {
+        [SerializeField] private BubbleEmitter character;
+        [SerializeField] private int screenIndex;
 
-    //     public override void Apply()
-    //     {
-    //         character.MoveTo(screenIndex);
-    //     }
-    // }
+        public void Apply()
+        {
+            character.MoveTo(screenIndex);
+        }
+    }
 }
 
 [System.Serializable]
@@ -90,7 +96,8 @@ public class Reply
     [SerializeField] private CharacterName characterName;
 }
 
-public abstract class AConsequence : ScriptableObject
-{
-    public abstract void Apply();
-}
+// [System.Serializable]
+// public abstract class AConsequence
+// {
+//     public abstract void Apply();
+// }

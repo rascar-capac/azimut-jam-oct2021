@@ -7,38 +7,68 @@ public class RepliesHandler : MonoBehaviour
     [SerializeField] private Bubble bubblePrefab;
     [SerializeField] private Canvas canvas;
     [SerializeField] private float interval;
-    private Queue<Bubble> bubbles;
+    private Queue<ConversationBubbles> conversations;
     private float timer;
 
 
 
-    public void CreateBubbles(Reply[] replies)
+    public void CreateConversation(Conversation conversation)
     {
-        foreach (var reply in replies)
+        Queue<Bubble> bubbles = new Queue<Bubble>();
+        foreach (var reply in conversation.Replies)
         {
             Bubble bubble = Instantiate(bubblePrefab, canvas.transform);
             bubble.Init(reply, this);
             bubbles.Enqueue(bubble);
         }
+        ConversationBubbles conversationBubbles = new ConversationBubbles(conversation, bubbles);
+        conversations.Enqueue(conversationBubbles);
     }
 
 
 
     private void Awake()
     {
-        bubbles = new Queue<Bubble>();
+        conversations = new Queue<ConversationBubbles>();
         timer = interval;
     }
 
     private void Update()
     {
-        if (bubbles.Count == 0) return;
+        if (conversations.Count == 0) return;
 
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
-            bubbles.Dequeue().Show();
-            timer = interval;
+            ConversationBubbles currentConversation = conversations.Peek();
+            if (currentConversation.Bubbles.Count == 0)
+            {
+                conversations.Dequeue();
+            }
+            else
+            {
+                currentConversation.Bubbles.Dequeue().Show();
+                timer = interval;
+                if (currentConversation.Bubbles.Count == 0)
+                {
+                    conversations.Dequeue().Conversation.IsEnded = true;
+                }
+            }
+        }
+    }
+
+    public class ConversationBubbles
+    {
+        public Conversation Conversation => conversation;
+        public Queue<Bubble> Bubbles => bubbles;
+
+        private Conversation conversation;
+        private Queue<Bubble> bubbles;
+
+        public ConversationBubbles(Conversation conversation, Queue<Bubble> bubbles)
+        {
+            this.conversation = conversation;
+            this.bubbles = bubbles;
         }
     }
 }

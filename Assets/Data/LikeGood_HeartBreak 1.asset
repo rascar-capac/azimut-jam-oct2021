@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a99fd5ac3a9f5c84781679af8e701969, type: 3}
-  m_Name: LikeGood_HeartBreak
+  m_Name: LikeGood_HeartBreak 1
   m_EditorClassIdentifier: Assembly-CSharp::EventsManager/Conversation
   replies:
   - text: "Bonjour cher monsieur, \xE7a boume du slip ?"
@@ -19,3 +19,4 @@ MonoBehaviour:
     characterName: 1
   - text: izi poto, on se met bien
     characterName: 3
+  participants: 0300000001000000

@@ -9,6 +9,7 @@ public class CharactersManager : MonoBehaviour
 
     private static CharactersManager instance;
     [SerializeField] private BubbleEmitter[] characters;
+    [SerializeField] private Conversation[] conversations;
 
 
 
@@ -24,11 +25,53 @@ public class CharactersManager : MonoBehaviour
         return null;
     }
 
+    public void CheckCharacterRoom(BubbleEmitter character)
+    {
+        foreach (var other in characters)
+        {
+            if (other.CurrentScreen == character.CurrentScreen)
+            {
+                foreach (var conversation in conversations)
+                {
+                    if (conversation.IsEnded) continue;
+
+                    bool everyoneIsPresent = true;
+                    foreach (var participantName in conversation.Participants)
+                    {
+                        BubbleEmitter participant = GetCharacter(participantName);
+                        if (participant != other && participant != character)
+                        {
+                            everyoneIsPresent = false;
+                            break;
+                        }
+                    }
+                    if (everyoneIsPresent)
+                    {
+                        conversation.Start();
+                    }
+                    return;
+                }
+            }
+        }
+    }
+
 
 
     private void Awake()
     {
         instance = this;
+        foreach (var conversation in conversations)
+        {
+            conversation.Init();
+        }
+    }
+
+    private void Start()
+    {
+        foreach (var character in characters)
+        {
+            CheckCharacterRoom(character);
+        }
     }
 }
 

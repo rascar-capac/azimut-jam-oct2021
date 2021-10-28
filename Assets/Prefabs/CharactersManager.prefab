@@ -52,6 +52,9 @@ MonoBehaviour:
   - {fileID: 2541258191490076529}
   - {fileID: 997736972056972093}
   - {fileID: 5410498268505150215}
+  conversations:
+  - {fileID: 11400000, guid: 4d4b2704e1b69004884f966c52c401b7, type: 2}
+  - {fileID: 11400000, guid: cce22bfd8fa9e454b90b5d65e4360cb5, type: 2}
 --- !u!1001 &3797161595755214013
 PrefabInstance:
   m_ObjectHideFlags: 0

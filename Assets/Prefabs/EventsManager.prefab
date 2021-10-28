@@ -43,4 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61ee31271380c9a4bb0229e57b90baae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  events: []
+  events:
+  - conditions:
+    - {fileID: 11400000, guid: 1dbcd1db099fdca4e905b08cd373981f, type: 2}
+    consequence:
+      character: {fileID: 0}
+      screenIndex: 1
+  transitionDuration: 3
